@@ -33,28 +33,28 @@ use cv::DataType;
 // }
 
 // &DynamicImage -> Mat
-impl TryToCv<cv::Mat> for image::DynamicImage {
-    type Error = Error;
-
-    fn try_to_cv(&self) -> Result<cv::Mat, Self::Error> {
-        use image::DynamicImage as D;
-
-        let mat = match self {
-            D::ImageLuma8(image) => image.try_to_cv()?,
-            D::ImageLumaA8(image) => image.try_to_cv()?,
-            D::ImageRgb8(image) => image.try_to_cv()?,
-            D::ImageRgba8(image) => image.try_to_cv()?,
-            D::ImageLuma16(image) => image.try_to_cv()?,
-            D::ImageLumaA16(image) => image.try_to_cv()?,
-            D::ImageRgb16(image) => image.try_to_cv()?,
-            D::ImageRgba16(image) => image.try_to_cv()?,
-            D::ImageRgb32F(image) => image.try_to_cv()?,
-            D::ImageRgba32F(image) => image.try_to_cv()?,
-            image => bail!("the color type {:?} is not supported", image.color()),
-        };
-        Ok(mat)
-    }
-}
+// impl TryToCv<cv::Mat> for image::DynamicImage {
+//     type Error = Error;
+//
+//     fn try_to_cv(&self) -> Result<cv::Mat, Self::Error> {
+//         use image::DynamicImage as D;
+//
+//         let mat = match self {
+//             D::ImageLuma8(image) => image.try_to_cv()?,
+//             D::ImageLumaA8(image) => image.try_to_cv()?,
+//             D::ImageRgb8(image) => image.try_to_cv()?,
+//             D::ImageRgba8(image) => image.try_to_cv()?,
+//             D::ImageLuma16(image) => image.try_to_cv()?,
+//             D::ImageLumaA16(image) => image.try_to_cv()?,
+//             D::ImageRgb16(image) => image.try_to_cv()?,
+//             D::ImageRgba16(image) => image.try_to_cv()?,
+//             D::ImageRgb32F(image) => image.try_to_cv()?,
+//             D::ImageRgba32F(image) => image.try_to_cv()?,
+//             image => bail!("the color type {:?} is not supported", image.color()),
+//         };
+//         Ok(mat)
+//     }
+// }
 
 // &Mat -> DynamicImage
 impl TryToCv<image::DynamicImage> for cv::Mat {

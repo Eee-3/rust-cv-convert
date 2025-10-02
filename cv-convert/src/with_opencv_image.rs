@@ -7,30 +7,30 @@ use std::ops::Deref;
 use cv::DataType;
 
 // &ImageBuffer -> Mat
-impl<P, Container> TryToCv<cv::Mat> for image::ImageBuffer<P, Container>
-where
-    P: image::Pixel,
-    P::Subpixel: OpenCvElement,
-    Container: Deref<Target = [P::Subpixel]> + Clone,
-{
-    type Error = Error;
-
-    fn try_to_cv(&self) -> Result<cv::Mat, Self::Error> {
-        let (width, height) = self.dimensions();
-        let cv_type = cv::CV_MAKETYPE(P::Subpixel::DEPTH, P::CHANNEL_COUNT as i32);
-        let mat = unsafe {
-            cv::Mat::new_rows_cols_with_data(
-                height as i32,
-                width as i32,
-                cv_type,
-                self.as_ptr() as *mut _,
-                cv::Mat_AUTO_STEP,
-            )?
-            .try_clone()?
-        };
-        Ok(mat)
-    }
-}
+// impl<P, Container> TryToCv<cv::Mat> for image::ImageBuffer<P, Container>
+// where
+//     P: image::Pixel,
+//     P::Subpixel: OpenCvElement,
+//     Container: Deref<Target = [P::Subpixel]> + Clone,
+// {
+//     type Error = Error;
+//
+//     fn try_to_cv(&self) -> Result<cv::Mat, Self::Error> {
+//         let (width, height) = self.dimensions();
+//         let cv_type = cv::CV_MAKETYPE(P::Subpixel::DEPTH, P::CHANNEL_COUNT as i32);
+//         let mat = unsafe {
+//             cv::Mat::new_rows_cols_with_data(
+//                 height as i32,
+//                 width as i32,
+//                 cv_type,
+//                 self.as_ptr() as *mut _,
+//                 cv::Mat_AUTO_STEP,
+//             )?
+//             .try_clone()?
+//         };
+//         Ok(mat)
+//     }
+// }
 
 // &DynamicImage -> Mat
 impl TryToCv<cv::Mat> for image::DynamicImage {

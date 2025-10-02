@@ -158,28 +158,28 @@ where
     }
 }
 
-impl<T> TryToCv<core_cv::Mat> for core_cv::Point_<T>
-where
-    T: core_cv::DataType,
-{
-    type Error = Error;
+// impl<T> TryToCv<core_cv::Mat> for core_cv::Point_<T>
+// where
+//     T: core_cv::DataType,
+// {
+//     type Error = Error;
+//
+//     fn try_to_cv(&self) -> Result<core_cv::Mat> {
+//         let core_cv::Point_ { x, y, .. } = *self;
+//         let mat = core_cv::Mat::from_slice(&[x, y])?;
+//         Ok(mat)
+//     }
+// }
 
-    fn try_to_cv(&self) -> Result<core_cv::Mat> {
-        let core_cv::Point_ { x, y, .. } = *self;
-        let mat = core_cv::Mat::from_slice(&[x, y])?;
-        Ok(mat)
-    }
-}
-
-impl<T> TryToCv<core_cv::Mat> for core_cv::Point3_<T>
-where
-    T: core_cv::DataType,
-{
-    type Error = Error;
-
-    fn try_to_cv(&self) -> Result<core_cv::Mat> {
-        let core_cv::Point3_ { x, y, z, .. } = *self;
-        let mat = core_cv::Mat::from_slice(&[x, y, z])?;
-        Ok(mat)
-    }
-}
+// impl<T> TryToCv<core_cv::Mat> for core_cv::Point3_<T>
+// where
+//     T: core_cv::DataType,
+// {
+//     type Error = Error;
+//
+//     fn try_to_cv(&self) -> Result<core_cv::Mat> {
+//         let core_cv::Point3_ { x, y, z, .. } = *self;
+//         let mat = core_cv::Mat::from_slice(&[x, y, z])?;
+//         Ok(mat)
+//     }
+// }
